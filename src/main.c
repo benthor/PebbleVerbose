@@ -9,7 +9,6 @@ static void main_window_load(Window *window) {
   s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_VERA_8));
   text_layer_set_background_color(s_time_layer, GColorBlack);
   text_layer_set_text_color(s_time_layer, GColorWhite);
-//  text_layer_set_text(s_time_layer, "FNORD");
   text_layer_set_font(s_time_layer, s_time_font);
 //  text_layer_set_overflow_mode(s_time_layer, GTextOverflowModeWordWrap);
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer));
@@ -64,7 +63,6 @@ static void update_time() {
   accel_service_peek(&accel);
 
   snprintf(buffer, sizeof(buffer), temp2, state.charge_percent, charging, plugged, connected, TRIGANGLE_TO_DEG(heading.magnetic_heading), TRIGANGLE_TO_DEG(heading.true_heading), accel.x, accel.y, accel.z);
-  // Display this time on the TextLayer
   text_layer_set_text(s_time_layer, buffer);
 }
 
