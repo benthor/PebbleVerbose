@@ -1,0 +1,39 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "elbbep@benthor.name",
+    "longName": "verbose",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "fonts/VeraMono.ttf",
+                "name": "FONT_VERA_8",
+                "type": "font"
+            },
+            {
+                "file": "fonts/PRNumber3.ttf",
+                "name": "FONT_APPLE_MONO_9",
+                "trackingAdjust": 1,
+                "type": "font"
+            },
+            {
+                "file": "fonts/PrintChar21.ttf",
+                "name": "FONT_APPLE_MONO_7",
+                "type": "font"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "verbose",
+    "targetPlatforms": [
+        "basalt"
+    ],
+    "uuid": "21c38abc-5d75-4283-9e10-f8c8521a2475",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
+}
