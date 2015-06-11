@@ -10,7 +10,6 @@ static void main_window_load(Window *window) {
   text_layer_set_background_color(s_time_layer, GColorBlack);
   text_layer_set_text_color(s_time_layer, GColorWhite);
   text_layer_set_font(s_time_layer, s_time_font);
-//  text_layer_set_overflow_mode(s_time_layer, GTextOverflowModeWordWrap);
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer));
 }
 
