@@ -8,7 +8,7 @@ static void main_window_load(Window *window) {
   s_time_layer = text_layer_create(GRect(0, 0, 144, 168));
   s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_VERA_8));
   text_layer_set_background_color(s_time_layer, GColorBlack);
-  text_layer_set_text_color(s_time_layer, GColorGreen);
+  text_layer_set_text_color(s_time_layer, GColorWhite);
 //  text_layer_set_text(s_time_layer, "FNORD");
   text_layer_set_font(s_time_layer, s_time_font);
 //  text_layer_set_overflow_mode(s_time_layer, GTextOverflowModeWordWrap);
@@ -27,18 +27,17 @@ static void update_time() {
 +--------------------------+\n\
 |   [ BENTHOR'S  WATCH ]   |\n\
 +--------------------------+\n\
-|          %H:%M           |\n\
+|         %H:%M:%S         |\n\
 |      %3a %F      |\n\
 +--------------------------+\n\
 | Battery Percent:    %%3u%%%% |\n\
 | Battery Charging:  %%5s |\n\
 | Charger Connected: %%5s |\n\
 | Bluetooth:  %%12s |\n\
-|                          |\n\
-|                          |\n\
-|                          |\n\
-|                          |\n\
-|                          |\n\
+| Heading:         %%3i %%3i |\n\
+| Accel X:           %%5i |\n\
+| Accel Y:           %%5i |\n\
+| Accel Z:           %%5i |\n\
 |                          |\n\
 |                          |\n\
 |                          |\n\
@@ -58,9 +57,13 @@ static void update_time() {
   state.is_plugged ? strcpy(plugged, "true") : strcpy(plugged, "false");
   bluetooth_connection_service_peek() ? strcpy(connected, "connected") : strcpy(connected, "disconnected");
   
+  CompassHeadingData heading;
+  compass_service_peek(&heading);
 
+  AccelData accel;
+  accel_service_peek(&accel);
 
-  snprintf(buffer, sizeof(buffer), temp2, state.charge_percent, charging, plugged, connected);
+  snprintf(buffer, sizeof(buffer), temp2, state.charge_percent, charging, plugged, connected, TRIGANGLE_TO_DEG(heading.magnetic_heading), TRIGANGLE_TO_DEG(heading.true_heading), accel.x, accel.y, accel.z);
   // Display this time on the TextLayer
   text_layer_set_text(s_time_layer, buffer);
 }
@@ -70,9 +73,6 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
   update_time();
 }
 
-//static void batt_handler(struct charge *BatteryChargeState) {
-//  update_batt();
-//}
 
 static void init() {
   s_main_window = window_create();
@@ -85,8 +85,8 @@ static void init() {
   
   window_stack_push(s_main_window, true);
 
-  tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
-  //battery_state_service_subscribe()
+//  tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
+  tick_timer_service_subscribe(SECOND_UNIT, tick_handler);
   update_time();
 
 }
