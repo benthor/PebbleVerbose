@@ -12,17 +12,6 @@
                 "file": "fonts/VeraMono.ttf",
                 "name": "FONT_VERA_8",
                 "type": "font"
-            },
-            {
-                "file": "fonts/PRNumber3.ttf",
-                "name": "FONT_APPLE_MONO_9",
-                "trackingAdjust": 1,
-                "type": "font"
-            },
-            {
-                "file": "fonts/PrintChar21.ttf",
-                "name": "FONT_APPLE_MONO_7",
-                "type": "font"
             }
         ]
     },
